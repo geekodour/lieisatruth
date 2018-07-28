@@ -9,6 +9,15 @@ It will:
   - WikiPedia entry
   - Certificate of truth
 
+## For tweets
+Embedd a very popular tweet, change *name*,*username*,*text*,*date*
+
+## For wikipedia
+Have a /lie/wiki html page. all static content, but replace content with query params
+
+## For Certificate
+Use canvas
+
 # Inspiration
 Inspiration is when my friend corrected my grammar on my instagram story.
 My Lie: *It's "in the planet", not "on the planet"*
