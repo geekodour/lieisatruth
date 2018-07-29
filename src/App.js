@@ -133,7 +133,7 @@ class App extends Component {
             </form>
           </div>
           <span className="f6 tracked gray db">this is totally fake and is for fun only, I do not intend to spread fake news.</span>
-          <span className="f6 tracked gray">by <a href="https://twitter.com/geekodour">@geekodour</a> - <a href="https://github.com/geekodour/truthisalie">opensourced</a></span>
+          <span className="f6 tracked gray">by <a href="https://twitter.com/geekodour">@geekodour</a> - <a href="https://github.com/geekodour/lieisatruth">opensourced</a></span>
         </header>
         <div className="fn fl-ns w-50-ns">
           <div id="potus_tweet_container"></div>
