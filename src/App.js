@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { generateTweet } from './utils'
+
+const options = {
+  potus_tweet: {
+    generate: generateTweet
+  },
+  indiapm_tweet: {
+    generate: generateTweet
+  },
+  wiki: {
+    generate: generateTweet
+  },
+  cert: {
+    generate: generateTweet
+  }
+}
 
 class App extends Component {
 
@@ -12,10 +28,9 @@ class App extends Component {
         options: []
       }
     }
-    this.handleLie = this.handleLie.bind(this)
   }
 
-  handleLie(event){
+  handleLie = (event) => {
     this.setState({ formData: {
       ...this.state.formData,
       lie: event.target.value
@@ -36,6 +51,12 @@ class App extends Component {
     }
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const {lie, options} = this.state.formData;
+    generateTweet("a","b","c")
+  }
+
   render() {
     return (
       <div className="App">
@@ -43,7 +64,7 @@ class App extends Component {
         <header className="fn fl-ns w-50-ns pr4-ns">
           <h1 className="f2 lh-title fw9 mb3 mt0 pt3 bt bw2"> Lie is a Truth </h1>
           <div className="">
-            <form className="bg-light-yellow mw7 center pa4 br2-ns">
+            <form className="bg-light-yellow mw7 center pa4 br2-ns" onSubmit={this.handleSubmit}>
               <fieldset className="cf bn ma0 pa0 mb3">
                 <div className="cf">
                   <label className="clip">lie</label>
@@ -109,15 +130,7 @@ class App extends Component {
           <span className="f6 tracked gray">by @geekodour - opensourced</span>
         </header>
         <div className="fn fl-ns w-50-ns">
-          <p className="f5 lh-copy measure mt0-ns">
-            <ul>
-              <li>Donald T tweet:</li>
-              <li>PM Modi tweet:</li>
-              <li>Donald T tweet:</li>
-              <li>Donald T tweet:</li>
-              <li>Donald T tweet:</li>
-            </ul>
-          </p>
+        <div id="coolstuff"></div>
         </div>
       </article>
       </div>
