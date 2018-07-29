@@ -6,20 +6,6 @@ import { generateTweet, clearContainers } from './utils'
 const potus_dp = "https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_bigger.jpg"
 const modi_dp = "https://pbs.twimg.com/profile_images/718314653181427716/9gKTzW1d_bigger.jpg"
 
-const options = {
-  potus_tweet: {
-    generate: generateTweet
-  },
-  indiapm_tweet: {
-    generate: generateTweet
-  },
-  wiki: {
-    generate: generateTweet
-  },
-  cert: {
-    generate: generateTweet
-  }
-}
 
 class App extends Component {
 
@@ -29,6 +15,27 @@ class App extends Component {
       formData: {
         lie: '',
         options: []
+      },
+      wikilink: ''
+    }
+  }
+
+  globalOptions = {
+    potus_tweet: {
+      generate: (lie) => {
+        generateTweet("Donald J. Trump","@realDonaldTrump",lie, potus_dp, "potus_tweet_container")
+      }
+    },
+    indiapm_tweet: {
+      generate: (lie) => {
+        generateTweet("PMO India","@PMOIndia",lie, modi_dp, "indiapm_tweet_container")
+      }
+    },
+    wiki: {
+      generate: (lie) => {
+        this.setState({
+          wikilink: "https://geekodour.github.io/wiki?lie="+lie
+        })
       }
     }
   }
@@ -60,8 +67,9 @@ class App extends Component {
     // if lie or options are not given, give error
     // add method to clear anything in container divs
     const {lie, options} = this.state.formData;
-    generateTweet("Donald J. Trump","@realDonaldTrump",lie, potus_dp, "potus_tweet_container")
-    generateTweet("PMO India","@PMOIndia",lie, modi_dp, "indiapm_tweet_container")
+    options.forEach((o)=>{
+      this.globalOptions[o].generate(lie);
+    })
   }
 
   render() {
@@ -115,15 +123,6 @@ class App extends Component {
                           onChange={this.handleOption}/>
                         <label htmlFor="wiki" className="lh-copy">fake god wikipedia page</label>
                       </div>
-                      <div className="flex items-center mb2">
-                        <input 
-                          className="mr2" 
-                          type="checkbox" 
-                          id="cert" 
-                          value="cert"
-                          onChange={this.handleOption}/>
-                        <label htmlFor="cert" className="lh-copy">certificate of truth</label>
-                      </div>
                 </div>
               </fieldset>
 
@@ -134,11 +133,19 @@ class App extends Component {
             </form>
           </div>
           <span className="f6 tracked gray db">this is totally fake and is for fun only, I do not intend to spread fake news.</span>
-          <span className="f6 tracked gray">by @geekodour - opensourced</span>
+          <span className="f6 tracked gray">by <a href="https://twitter.com/geekodour">@geekodour</a> - <a href="https://github.com/geekodour/truthisalie">opensourced</a></span>
         </header>
         <div className="fn fl-ns w-50-ns">
-        <div id="potus_tweet_container"></div>
-        <div id="indiapm_tweet_container"></div>
+          <div id="potus_tweet_container"></div>
+          <div id="indiapm_tweet_container"></div>
+          <div id="wiki_link_container">
+            {this.state.wikilink?
+              <a 
+                target="_blank" 
+                className="f6 link dim br1 ph3 pv2 mb2 dib white bg-black"
+                href={this.state.wikilink}>Link to Wikipedia statement</a>
+            :<p/>}
+          </div>
         </div>
       </article>
       </div>
