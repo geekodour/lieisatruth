@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { generateTweet } from './utils'
+import { generateTweet, clearContainers } from './utils'
+
+const potus_dp = "https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_bigger.jpg"
+const modi_dp = "https://pbs.twimg.com/profile_images/718314653181427716/9gKTzW1d_bigger.jpg"
 
 const options = {
   potus_tweet: {
@@ -53,8 +56,12 @@ class App extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    clearContainers()
+    // if lie or options are not given, give error
+    // add method to clear anything in container divs
     const {lie, options} = this.state.formData;
-    generateTweet("a","b","c")
+    generateTweet("Donald J. Trump","@realDonaldTrump",lie, potus_dp, "potus_tweet_container")
+    generateTweet("PMO India","@PMOIndia",lie, modi_dp, "indiapm_tweet_container")
   }
 
   render() {
@@ -130,7 +137,8 @@ class App extends Component {
           <span className="f6 tracked gray">by @geekodour - opensourced</span>
         </header>
         <div className="fn fl-ns w-50-ns">
-        <div id="coolstuff"></div>
+        <div id="potus_tweet_container"></div>
+        <div id="indiapm_tweet_container"></div>
         </div>
       </article>
       </div>
